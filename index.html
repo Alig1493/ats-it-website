@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS IT Solutions | Custom Software, SaaS & AI Solutions</title>
+    <meta name="description" content="Remote-first tech company building custom software, SaaS products, and AI solutions for startups and SMBs ready to scale.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            purple: '#8b5cf6',
+                            cyan: '#06b6d4',
+                            pink: '#ec4899'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'gradient': 'gradient 15s ease infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        gradient: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-dark {
+            background: rgba(17, 24, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-900 bg-white overflow-x-hidden">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-600 to-accent-purple flex items-center justify-center">
+                        <i data-lucide="code-2" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold bg-gradient-to-r from-brand-600 to-accent-purple bg-clip-text text-transparent">
+                        ATS IT
+                    </span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Services</a>
+                    <a href="#about" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">About</a>
+                    <a href="#process" class="text-gray-600 hover:text-brand-600 font-medium transition-colors">Process</a>
+                    <a href="#contact" class="px-6 py-3 rounded-full bg-gradient-to-r from-brand-600 to-accent-purple text-white font-semibold hover:shadow-lg hover:shadow-brand-500/30 transition-all transform hover:-translate-y-0.5">
+                        Start Project
+                    </a>
+                </div>
+                
+                <button class="md:hidden p-2" id="mobile-menu-btn">
+                    <i data-lucide="menu" class="w-6 h-6 text-gray-700"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden glass-dark absolute w-full" id="mobile-menu">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#services" class="block px-3 py-2 text-gray-300 hover:text-white font-medium">Services</a>
+                <a href="#about" class="block px-3 py-2 text-gray-300 hover:text-white font-medium">About</a>
+                <a href="#process" class="block px-3 py-2 text-gray-300 hover:text-white font-medium">Process</a>
+                <a href="#contact" class="block px-3 py-2 text-brand-400 font-semibold">Start Project</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Animated Background Blobs -->
+        <div class="blob w-96 h-96 bg-brand-500 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2 animate-pulse-slow"></div>
+        <div class="blob w-96 h-96 bg-accent-purple rounded-full bottom-0 right-0 translate-x-1/2 translate-y-1/2 animate-pulse-slow" style="animation-delay: 2s;"></div>
+        <div class="blob w-64 h-64 bg-accent-cyan rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse-slow" style="animation-delay: 4s;"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-100 mb-8 animate-float">
+                <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                <span class="text-sm font-medium text-brand-700">Remote-first team • Global delivery</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                We Build <span class="gradient-text">Digital Products</span><br>
+                That Scale With You
+            </h1>
+            
+            <p class="text-xl md:text-2xl text-gray-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+                Custom software, SaaS platforms, and AI solutions — engineered remotely for startups and SMBs ready to grow without limits.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#contact" class="px-8 py-4 rounded-full bg-gradient-to-r from-brand-600 to-accent-purple text-white font-semibold text-lg hover:shadow-xl hover:shadow-brand-500/30 transition-all transform hover:-translate-y-1 flex items-center gap-2">
+                    Start Your Project
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+                <a href="#services" class="px-8 py-4 rounded-full border-2 border-gray-200 text-gray-700 font-semibold text-lg hover:border-brand-600 hover:text-brand-600 transition-all flex items-center gap-2">
+                    Explore Services
+                </a>
+            </div>
+            
+            <!-- Stats -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-gray-900">50+</div>
+                    <div class="text-sm text-gray-500 mt-1">Projects Delivered</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-gray-900">98%</div>
+                    <div class="text-sm text-gray-500 mt-1">Client Satisfaction</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-gray-900">12</div>
+                    <div class="text-sm text-gray-500 mt-1">Countries Served</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-gray-900">24/7</div>
+                    <div class="text-sm text-gray-500 mt-1">Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-gray-50 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-brand-600 font-semibold text-lg mb-2">What We Do</h2>
+                <h3 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">End-to-End Tech Solutions</h3>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    From concept to deployment, we handle the complex tech so you can focus on growing your business.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Custom Software -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-brand-100 to-transparent rounded-bl-full opacity-50 group-hover:scale-110 transition-transform"></div>
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center mb-6">
+                        <i data-lucide="settings" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-900 mb-3">Custom Software</h4>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Bespoke applications tailored to your unique workflows. We build robust, scalable software that solves real business problems.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-brand-500"></i>
+                            Web & Mobile Applications
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-brand-500"></i>
+                            Enterprise Systems
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-brand-500"></i>
+                            API Development & Integration
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- SaaS Products -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent-purple/20 to-transparent rounded-bl-full opacity-50 group-hover:scale-110 transition-transform"></div>
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-purple to-purple-700 flex items-center justify-center mb-6">
+                        <i data-lucide="cloud" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-900 mb-3">SaaS Products</h4>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Cloud-native platforms designed for scale. We architect multi-tenant solutions with subscription billing and user management.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-accent-purple"></i>
+                            Multi-tenant Architecture
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-accent-purple"></i>
+                            Subscription Management
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-accent-purple"></i>
+                            Auto-scaling Infrastructure
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- AI Solutions -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100 relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-accent-cyan/20 to-transparent rounded-bl-full opacity-50 group-hover:scale-110 transition-transform"></div>
+                    <div class="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-cyan to-cyan-700 flex items-center justify-center mb-6">
+                        <i data-lucide="brain" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-gray-900 mb-3">AI Solutions</h4>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Intelligent automation and machine learning integrations. From chatbots to predictive analytics, we make AI work for you.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-accent-cyan"></i>
+                            LLM Integration & Chatbots
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-accent-cyan"></i>
+                            Predictive Analytics
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <i data-lucide="check-circle" class="w-4 h-4 text-accent-cyan"></i>
+                            Process Automation
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About/Remote Section -->
+    <section id="about" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-brand-500 to-accent-purple rounded-3xl transform rotate-3 opacity-20"></div>
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+                        <img src="http://static.photos/technology/800x600/42" alt="Remote Team Collaboration" class="w-full h-auto object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6">
+                            <div class="glass rounded-xl p-4 flex items-center gap-4">
+                                <div class="flex -space-x-3">
+                                    <img src="http://static.photos/people/100x100/1" class="w-10 h-10 rounded-full border-2 border-white" alt="Team member">
+                                    <img src="http://static.photos/people/100x100/2" class="w-10 h-10 rounded-full border-2 border-white" alt="Team member">
+                                    <img src="http://static.photos/people/100x100/3" class="w-10 h-10 rounded-full border-2 border-white" alt="Team member">
+                                    <div class="w-10 h-10 rounded-full border-2 border-white bg-brand-600 flex items-center justify-center text-white text-xs font-bold">+8</div>
+                                </div>
+                                <div class="text-white">
+                                    <div class="text-sm font-semibold">Global Team</div>
+                                    <div class="text-xs opacity-80">12 countries • 4 continents</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h2 class="text-brand-600 font-semibold text-lg mb-2">Why Choose Us</h2>
+                    <h3 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Remote-First.<br>Results-Focused.</h3>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        We believe talent has no borders. Our distributed team brings diverse perspectives and round-the-clock productivity to your project. Without the overhead of physical offices, we invest more in what matters: exceptional code and happy clients.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="globe" class="w-6 h-6 text-brand-600"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 mb-1">Global Talent Pool</h4>
+                                <p class="text-gray-600">Access to top developers, designers, and AI specialists worldwide.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-accent-purple/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="zap" class="w-6 h-6 text-accent-purple"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 mb-1">Faster Delivery</h4>
+                                <p class="text-gray-600">24/7 development cycles with handoffs across time zones.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-accent-cyan/20 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="wallet" class="w-6 h-6 text-accent-cyan"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-semibold text-gray-900 mb-1">Cost Efficient</h4>
+                                <p class="text-gray-600">No office overhead means competitive rates for enterprise-quality work.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="py-24 bg-gray-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-brand-400 font-semibold text-lg mb-2">Our Process</h2>
+                <h3 class="text-4xl md:text-5xl font-bold mb-4">How We Work</h3>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                    A battle-tested workflow designed for remote collaboration and transparent delivery.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="relative">
+                    <div class="glass rounded-2xl p-6 h-full">
+                        <div class="w-12 h-12 rounded-full bg-brand-600 flex items-center justify-center text-xl font-bold mb-4">1</div>
+                        <h4 class="text-xl font-bold mb-2">Discovery</h4>
+                        <p class="text-gray-400 text-sm">Deep dive into your business, users, and technical requirements.</p>
+                    </div>
+                    <div class="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-brand-600 to-accent-purple"></div>
+                </div>
+                
+                <div class="relative">
+                    <div class="glass rounded-2xl p-6 h-full">
+                        <div class="w-12 h-12 rounded-full bg-accent-purple flex items-center justify-center text-xl font-bold mb-4">2</div>
+                        <h4 class="text-xl font-bold mb-2">Strategy</h4>
+                        <p class="text-gray-400 text-sm">Architecture design, tech stack selection, and roadmap planning.</p>
+                    </div>
+                    <div class="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-accent-purple to-accent-cyan"></div>
+                </div>
+                
+                <div class="relative">
+                    <div class="glass rounded-2xl p-6 h-full">
+                        <div class="w-12 h-12 rounded-full bg-accent-cyan flex items-center justify-center text-xl font-bold mb-4">3</div>
+                        <h4 class="text-xl font-bold mb-2">Development</h4>
+                        <p class="text-gray-400 text-sm">Agile sprints with weekly demos, continuous integration, and testing.</p>
+                    </div>
+                    <div class="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-gradient-to-r from-accent-cyan to-brand-600"></div>
+                </div>
+                
+                <div class="relative">
+                    <div class="glass rounded-2xl p-6 h-full">
+                        <div class="w-12 h-12 rounded-full bg-green-500 flex items-center justify-center text-xl font-bold mb-4">4</div>
+                        <h4 class="text-xl font-bold mb-2">Launch & Scale</h4>
+                        <p class="text-gray-400 text-sm">Deployment, monitoring, and ongoing support as you grow.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="py-24 relative overflow-hidden">
+        <div class="absolute inset-0 hero-gradient opacity-10"></div>
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-4xl md:text-6xl font-bold text-gray-900 mb-6">Ready to Build Something Amazing?</h2>
+            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+                Let's discuss how we can help transform your ideas into scalable digital products. No commitment required.
+            </p>
+            
+            <form class="max-w-md mx-auto space-y-4 mb-8" onsubmit="event.preventDefault(); alert('Thanks for your interest! We will contact you shortly.');">
+                <div class="flex gap-4">
+                    <input type="text" placeholder="Your Name" class="flex-1 px-6 py-3 rounded-full border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all" required>
+                </div>
+                <div class="flex gap-4">
+                    <input type="email" placeholder="Work Email" class="flex-1 px-6 py-3 rounded-full border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all" required>
+                </div>
+                <select class="w-full px-6 py-3 rounded-full border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-white">
+                    <option value="">What do you need?</option>
+                    <option value="custom">Custom Software</option>
+                    <option value="saas">SaaS Product</option>
+                    <option value="ai">AI Solution</option>
+                    <option value="other">Other</option>
+                </select>
+                <button type="submit" class="w-full px-8 py-4 rounded-full bg-gradient-to-r from-brand-600 to-accent-purple text-white font-semibold text-lg hover:shadow-xl hover:shadow-brand-500/30 transition-all transform hover:-translate-y-1">
+                    Get Free Consultation
+                </button>
+            </form>
+            
+            <p class="text-sm text-gray-500">Or email us directly at <a href="mailto:hello@ats-it.com" class="text-brand-600 font-semibold hover:underline">hello@ats-it.com</a></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-2">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-600 to-accent-purple flex items-center justify-center">
+                            <i data-lucide="code-2" class="w-5 h-5 text-white"></i>
+                        </div>
+                        <span class="text-lg font-bold">ATS IT Solutions</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-sm">
+                        Remote-first tech company building custom software, SaaS, and AI solutions for growing businesses worldwide.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-600 transition-colors">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-600 transition-colors">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-600 transition-colors">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Custom Software</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">SaaS Development</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">AI Solutions</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Consulting</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">© 2024 ATS IT Solutions. All rights reserved.</p>
+                <div class="flex gap-6 text-sm text-gray-500">
+                    <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+        
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-dark', 'shadow-lg');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('glass-dark', 'shadow-lg');
+                navbar.classList.add('bg-transparent');
+            }
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe service cards
+        document.querySelectorAll('.service-card').forEach((el) => {
+            el.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+    </script>
+<script src="https://deepsite.hf.co/deepsite-badge.js"></script>
+</body>
+</html>
