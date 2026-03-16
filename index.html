@@ -424,14 +424,15 @@
                 Let's discuss how we can help transform your ideas into scalable digital products. No commitment required.
             </p>
             
-            <form class="max-w-md mx-auto space-y-4 mb-8" onsubmit="event.preventDefault(); alert('Thanks for your interest! We will contact you shortly.');">
+            <form class="max-w-md mx-auto space-y-4 mb-8" name="contact" method="POST" netlify action="#contact">
+                <input type="hidden" name="form-name" value="contact" />
                 <div class="flex gap-4">
-                    <input type="text" placeholder="Your Name" class="flex-1 px-6 py-3 rounded-full border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all" required>
+                    <input type="text" name="name" placeholder="Your Name" class="flex-1 px-6 py-3 rounded-full border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all" required>
                 </div>
                 <div class="flex gap-4">
-                    <input type="email" placeholder="Work Email" class="flex-1 px-6 py-3 rounded-full border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all" required>
+                    <input type="email" name="email" placeholder="Work Email" class="flex-1 px-6 py-3 rounded-full border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all" required>
                 </div>
-                <select class="w-full px-6 py-3 rounded-full border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-white">
+                <select name="service" class="w-full px-6 py-3 rounded-full border border-gray-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-200 outline-none transition-all bg-white">
                     <option value="">What do you need?</option>
                     <option value="custom">Custom Software</option>
                     <option value="saas">SaaS Product</option>
@@ -443,7 +444,7 @@
                 </button>
             </form>
             
-            <p class="text-sm text-gray-500">Or email us directly at <a href="mailto:hello@ats-it.com" class="text-brand-600 font-semibold hover:underline">hello@ats-it.com</a></p>
+            
         </div>
     </section>
 
